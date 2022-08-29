@@ -7,15 +7,15 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def query_unicorns():
-    name = request.args.get('name')
-    print name
-    with open('/tmp/data.txt', 'r') as f:
-        data = f.read()
-        records = json.loads(data)
-        for record in records:
-            if record['name'] == name:
-                return jsonify(record)
-        return jsonify({'error': 'data not found'})
+    return "It Works!"
+    # return json.dumps({{'name': 'Sparkleton'},{'name': 'Stinky Phil'}})
+    # with open('/tmp/data.txt', 'r') as f:
+    #     data = f.read()
+    #     records = json.loads(data)
+    #     for record in records:
+    #         if record['name'] == name:
+    #             return jsonify(record)
+    #     return jsonify({'error': 'data not found'})
 
 @app.route('/', methods=['PUT'])
 def create_post():
@@ -62,4 +62,4 @@ def update_post():
 #     return jsonify(record)
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", debug=True)
+    app.run(port=8080, host="0.0.0.0", debug=True)

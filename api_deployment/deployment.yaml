@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend_api
+  labels:
+    app: backend_api
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend_api
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: backend_api
+    spec:
+      containers:
+      - image: URI
+        imagePullPolicy: Always
+        name: backend_api
+        ports:
+        - containerPort: 80
+          protocol: TCP

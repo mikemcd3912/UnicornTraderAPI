@@ -1,21 +1,28 @@
 #!/usr/bin/env python
 # encoding: utf-8
-import json
+import json, boto3
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET'])
-def query_unicorns():
+client = boto3.client('dynamodb',
+  aws_access_key_id='yyyy',
+  aws_secret_access_key='xxxx',
+  region_name='us-east-1')
+
+@app.route('/test', methods=['GET'])
+def test_route():
     return "It Works!"
-    # return json.dumps({{'name': 'Sparkleton'},{'name': 'Stinky Phil'}})
-    # with open('/tmp/data.txt', 'r') as f:
-    #     data = f.read()
-    #     records = json.loads(data)
-    #     for record in records:
-    #         if record['name'] == name:
-    #             return jsonify(record)
-    #     return jsonify({'error': 'data not found'})
+    
+    
+@app.route('/getAll', methods=['GET'])
+def query_unicorns():
+    dynamo = boto3.resource('dynamodb', region_name='us-west-2')
+    table = dynamo.Table('Posts')
+    response = table.scan()
+    data = response['Items']
+    return json.dumps(data)
+    
 
 @app.route('/', methods=['PUT'])
 def create_post():

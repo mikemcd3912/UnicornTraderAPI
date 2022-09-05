@@ -10,13 +10,21 @@ client = boto3.client('dynamodb',
 
 @app.route('/test', methods=['GET'])
 def test_route():
-    return "It Works!"
+    tablesMap = client.listTables()
+    namesList = tablesMap['TableNames']
+    tableName = namesList[0]
+    dynamo = boto3.resource('dynamodb', region_name='us-west-2')
+    table = dynamo.Table(tableName)
+    return "It Works!" + tablesMap + " " + namesList + " " + tableName
     
     
 @app.route('/getAll', methods=['GET'])
 def query_unicorns():
+    tablesMap = client.listTables()
+    namesList = tablesMap['TableNames']
+    tableName = namesList[0]
     dynamo = boto3.resource('dynamodb', region_name='us-west-2')
-    table = dynamo.Table(client.listTables()['TableNames'][0])
+    table = dynamo.Table(tableName)
     response = table.scan()
     data = response['Items']
     return json.dumps(data)

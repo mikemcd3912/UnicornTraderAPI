@@ -5,26 +5,18 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-client = boto3.client('dynamodb',
-  region_name='us-east-1')
+# client = boto3.client('dynamodb',
+#   region_name='us-east-1')
 
 @app.route('/test', methods=['GET'])
 def test_route():
-    tablesMap = client.listTables()
-    namesList = tablesMap['TableNames']
-    tableName = namesList[0]
-    dynamo = boto3.resource('dynamodb', region_name='us-west-2')
-    table = dynamo.Table(tableName)
-    return "Deployed!" + tablesMap + " " + namesList + " " + tableName
+    return "It Works!"
     
     
 @app.route('/getAll', methods=['GET'])
 def query_unicorns():
-    tablesMap = client.listTables()
-    namesList = tablesMap['TableNames']
-    tableName = namesList[0]
     dynamo = boto3.resource('dynamodb', region_name='us-west-2')
-    table = dynamo.Table(tableName)
+    table = dynamo.Table('serviceInfra-Posts868B3EAD-5N1O0N7NHVDU')
     response = table.scan()
     data = response['Items']
     return json.dumps(data)

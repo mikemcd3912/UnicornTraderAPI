@@ -2,11 +2,10 @@
 # encoding: utf-8
 import json, boto3
 from flask import Flask, request, jsonify
+from flask_cors import CORS;
 
 app = Flask(__name__)
-
-# client = boto3.client('dynamodb',
-#   region_name='us-east-1')
+CORS(app)
 
 @app.route('/test', methods=['GET'])
 def test_route():

@@ -18,7 +18,7 @@ def query_unicorns():
     table = dynamo.Table('serviceInfra-Posts868B3EAD-5N1O0N7NHVDU')
     response = table.scan()
     data = response['Items']
-    return json.dumps(data)
+    return data
     
 
 if __name__ == '__main__':

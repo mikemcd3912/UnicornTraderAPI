@@ -20,7 +20,7 @@ spec:
         app: backendapi
     spec:
       containers:
-      - image: 359322168451.dkr.ecr.us-west-2.amazonaws.com/capstone:backend_api_v1.2
+      - image: 359322168451.dkr.ecr.us-west-2.amazonaws.com/capstone:backend_api_v1.3
         imagePullPolicy: Always
         name: backendapi
         ports:

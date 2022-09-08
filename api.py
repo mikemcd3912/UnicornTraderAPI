@@ -13,7 +13,7 @@ def test_route():
     return "It Works!"
     
     
-@app.route('/getAll', methods=['GET'])
+@app.route('/', methods=['GET'])
 def query_unicorns():
     dynamo = boto3.resource('dynamodb', region_name='us-west-2')
     table = dynamo.Table('serviceInfra-Posts868B3EAD-5N1O0N7NHVDU')

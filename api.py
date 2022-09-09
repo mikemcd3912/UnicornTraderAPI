@@ -17,8 +17,7 @@ def query_unicorns():
     dynamo = boto3.resource('dynamodb', region_name='us-west-2')
     table = dynamo.Table('serviceInfra-Posts868B3EAD-5N1O0N7NHVDU')
     response = table.scan()
-    data = response['Items']
-    return data
+    return json.dumps(response)
     
 
 if __name__ == '__main__':
